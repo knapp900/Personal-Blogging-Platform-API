@@ -52,6 +52,11 @@ public class User implements Serializable {
 	private String lastName;
 	
 	@NotNull
+	@Size(min=6,max=30)
+	@Column(name = "c_password")
+	private String password;
+	
+	@NotNull
 	@Email
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
