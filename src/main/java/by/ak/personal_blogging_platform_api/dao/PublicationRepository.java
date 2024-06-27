@@ -14,5 +14,5 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
 
 	List<Publication> findByContentContaining(String word);
 
-	List<Publication> findByTagsIn(List<Tag> tags);
+//	List<Publication> findByTagsIn(List<Tag> tags);
 }

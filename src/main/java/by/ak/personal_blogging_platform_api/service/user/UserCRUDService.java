@@ -12,7 +12,7 @@ public interface UserCRUDService {
 
 	List<User> getAllUsers();
 
-	boolean deleteUser(long id);
+	void deleteUser(long id);
 
 	User updateUser(long id, User user);
 }
