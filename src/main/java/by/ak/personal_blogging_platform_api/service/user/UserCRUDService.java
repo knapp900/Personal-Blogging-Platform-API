@@ -3,6 +3,7 @@ package by.ak.personal_blogging_platform_api.service.user;
 import java.util.List;
 
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
+import by.ak.personal_blogging_platform_api.service.publication.ServiceException;
 
 public interface UserCRUDService {
 

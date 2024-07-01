@@ -38,31 +38,30 @@ public class User implements Serializable {
 	private Long id;
 	
 	@NotNull
-	@Size(min=2, max=30)
+	@Size(min=2, max=30 , message = "Nickname size should be more 2 character and not more 30 character")
 	@Column(name = "nickname", nullable = false, length = 30)
 	private String nickname;
 	
 	@NotNull
-	@Size(min=2, max=30)
+	@Size(min=2, max=30, message = "Firstname size should be more 2 character and not more 30 character")
 	@Column(name = "firstName", nullable = false, length = 30)
 	private String firstName;
 	
 	@NotNull
-	@Size(min=2, max=30)
+	@Size(min=2, max=30, message = "Lastname size should be more 2 character and not more 30 character")
 	@Column(name = "lastName", nullable = false, length = 30)
 	private String lastName;
 	
 	@NotNull
-	@Size(min=6,max=30)
+	@Size(min=6,max=30, message = "Password size should be more 2 character and not more 30 character")
 	@Column(name = "c_password")
 	private String password;
 	
-	@NotNull
-	@Email
+	@NotNull(message = "Email should not be null")
+	@Email(message = "Email validation error")
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
-	@NotNull
 	@Column(name = "date_of_creation", nullable = false)
 	private LocalDate dateOfCreation;
 

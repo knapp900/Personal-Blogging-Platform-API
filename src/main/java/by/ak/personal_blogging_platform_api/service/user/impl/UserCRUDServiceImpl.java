@@ -65,8 +65,8 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     public User updateUser(long id, User user) {
         User existingUser = repository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("User not found with id: {}", id);
-                    return new NoSuchElementException("User not found with id: " + id);
+                    log.error("User not exist with id: {}", id);
+                    return new NoSuchElementException("User not exist with id: " + id);
                 });
 
         existingUser.setEmail(user.getEmail());
