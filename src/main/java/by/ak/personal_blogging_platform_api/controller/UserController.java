@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
+import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
+import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
 import by.ak.personal_blogging_platform_api.service.publication.ServiceException;
 import by.ak.personal_blogging_platform_api.service.user.UserCRUDService;
 import jakarta.validation.Valid;
@@ -28,33 +30,33 @@ public class UserController {
     private final UserCRUDService service;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserCreationDto user) {
         log.info("Creating user: {}", user);
-        User createdUser = service.createUser(user);
+        UserDto createdUser = service.createUser(user);
         log.info("User created: {}", createdUser);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
         log.info("Fetching user with id: {}", id);
-        User user = service.getUserById(id);
+        UserDto user = service.getUserById(id);
         log.info("User fetched: {}", user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         log.info("Fetching all users");
-        List<User> users = service.getAllUsers();
+        List<UserDto> users = service.getAllUsers();
         log.info("Users fetched: {}", users);
         return ResponseEntity.ok(users);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@Valid @PathVariable Long id, @RequestBody User userDetails) throws ServiceException {
+    public ResponseEntity<UserDto> updateUser(@Valid @PathVariable Long id, @RequestBody UserCreationDto userDetails) throws ServiceException {
         log.info("Updating user with id: {}, details: {}", id, userDetails);
-        User updatedUser = service.updateUser(id, userDetails);
+        UserDto updatedUser = service.updateUser(id, userDetails);
         log.info("User updated: {}", updatedUser);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }

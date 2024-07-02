@@ -1,6 +1,6 @@
 package by.ak.personal_blogging_platform_api.exception;
 
-import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -8,16 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolation;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -30,10 +26,35 @@ public class GlobalExceptionHandler {
 
 		log.error("Element not found " + request.getRequestURI(), ex);
 
-		ErrorResponse errorResponse = new ErrorResponse(ZonedDateTime.now(), HttpStatus.NOT_FOUND.value(),
-				ex.getMessage(), Map.of(), request.getMethod(), request.getRequestURI());
+		ErrorResponse errorResponse = ErrorResponse.builder()
+				.timestamp(ZonedDateTime.now())
+				.status(HttpStatus.NOT_FOUND.value())
+				.message("Element not found")
+				.errors(Map.of("error", ex.getMessage()))
+				.method(request.getMethod())
+				.path(request.getRequestURI())
+				.build();
+
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
+
+//	@ExceptionHandler(DataIntegrityViolationException.class)
+//	public ResponseEntity<ErrorResponse> handleDataViolation(DataIntegrityViolationException ex,
+//			HttpServletRequest request) {
+//
+//		log.error("Database error " + request.getRequestURI(), ex);
+//
+//		ErrorResponse errorResponse = ErrorResponse.builder()
+//				.timestamp(ZonedDateTime.now())
+//				.status(HttpStatus.BAD_REQUEST.value())
+//				.message("Validation failed")
+//				.errors(Map.of("error", ex.getRootCause().getMessage()))
+//				.method(request.getMethod())
+//				.path(request.getRequestURI())
+//				.build();
+//
+//		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+//	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleInvalidArgument(MethodArgumentNotValidException ex,
@@ -46,21 +67,14 @@ public class GlobalExceptionHandler {
 			errorMap.put(error.getField(), error.getDefaultMessage());
 		});
 
-		ErrorResponse errorResponse = new ErrorResponse(ZonedDateTime.now(), HttpStatus.BAD_REQUEST.value(),
-				"Validation failed", errorMap, request.getMethod(), request.getRequestURI());
-		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-	}
+		ErrorResponse errorResponse = ErrorResponse.builder()
+				.timestamp(ZonedDateTime.now())
+				.status(HttpStatus.BAD_REQUEST.value())
+				.message("Validation failed").errors(errorMap)
+				.method(request.getMethod())
+				.path(request.getRequestURI())
+				.build();
 
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<ErrorResponse> handleConstraintViolation(ConstraintViolationException ex,
-			HttpServletRequest request) {
-
-		log.error("Validation error " + request.getRequestURI(), ex);
-
-		Map<String, String> errorMap = new HashMap<>();
-
-		ErrorResponse errorResponse = new ErrorResponse(ZonedDateTime.now(), HttpStatus.BAD_REQUEST.value(),
-				"Validation failed", errorMap, request.getMethod(), request.getRequestURI());
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
 
@@ -69,22 +83,16 @@ public class GlobalExceptionHandler {
 
 		log.error("An error occurred " + request.getRequestURI(), ex);
 
-		ErrorResponse errorResponse = new ErrorResponse(ZonedDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
-				"An unexpected error occurred", Map.of("ex", ex.getCause().getCause().getMessage()),
-				request.getMethod(), request.getRequestURI());
+		String causeMessage = (ex.getCause() != null) ? ex.getCause().getLocalizedMessage() : ex.getMessage();
+
+		ErrorResponse errorResponse = ErrorResponse.builder()
+				.timestamp(ZonedDateTime.now())
+				.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.message("An unexpected error occurred")
+				.errors(Map.of("error", causeMessage))
+				.method(request.getMethod())
+				.path(request.getRequestURI())
+				.build();
 		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-}
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-class ErrorResponse {
-	private ZonedDateTime timestamp;
-	private int status;
-	private String message;
-	private Map<String, String> errors;
-	private String method;
-	private String path;
-
 }

@@ -17,9 +17,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,30 +32,26 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 	
-	@NotNull
-	@Size(min=2, max=30 , message = "Nickname size should be more 2 character and not more 30 character")
+	
 	@Column(name = "nickname", nullable = false, length = 30)
 	private String nickname;
 	
-	@NotNull
-	@Size(min=2, max=30, message = "Firstname size should be more 2 character and not more 30 character")
-	@Column(name = "firstName", nullable = false, length = 30)
-	private String firstName;
 	
-	@NotNull
-	@Size(min=2, max=30, message = "Lastname size should be more 2 character and not more 30 character")
-	@Column(name = "lastName", nullable = false, length = 30)
-	private String lastName;
+	@Column(name = "firstname", nullable = false, length = 30)
+	private String firstname;
 	
-	@NotNull
-	@Size(min=6,max=30, message = "Password size should be more 2 character and not more 30 character")
-	@Column(name = "c_password")
+	
+	@Column(name = "lastname", nullable = false, length = 30)
+	private String lastname;
+	
+	
+	@Column(name = "password")
 	private String password;
 	
-	@NotNull(message = "Email should not be null")
-	@Email(message = "Email validation error")
+	
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	

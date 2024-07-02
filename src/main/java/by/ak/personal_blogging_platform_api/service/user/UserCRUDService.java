@@ -2,18 +2,18 @@ package by.ak.personal_blogging_platform_api.service.user;
 
 import java.util.List;
 
-import by.ak.personal_blogging_platform_api.entity.userEntity.User;
-import by.ak.personal_blogging_platform_api.service.publication.ServiceException;
+import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
+import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
 
 public interface UserCRUDService {
 
-	User createUser(User user);
+	UserDto createUser(UserCreationDto userCreationDto);
 
-	User getUserById(long id);
+	UserDto getUserById(long id);
 
-	List<User> getAllUsers();
+	List<UserDto> getAllUsers();
 
 	void deleteUser(long id);
 
-	User updateUser(long id, User user);
+	UserDto updateUser(long id, UserCreationDto user);
 }
