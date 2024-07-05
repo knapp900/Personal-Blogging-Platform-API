@@ -1,6 +1,5 @@
 package by.ak.personal_blogging_platform_api.exception;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -38,23 +37,6 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 
-//	@ExceptionHandler(DataIntegrityViolationException.class)
-//	public ResponseEntity<ErrorResponse> handleDataViolation(DataIntegrityViolationException ex,
-//			HttpServletRequest request) {
-//
-//		log.error("Database error " + request.getRequestURI(), ex);
-//
-//		ErrorResponse errorResponse = ErrorResponse.builder()
-//				.timestamp(ZonedDateTime.now())
-//				.status(HttpStatus.BAD_REQUEST.value())
-//				.message("Validation failed")
-//				.errors(Map.of("error", ex.getRootCause().getMessage()))
-//				.method(request.getMethod())
-//				.path(request.getRequestURI())
-//				.build();
-//
-//		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-//	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleInvalidArgument(MethodArgumentNotValidException ex,

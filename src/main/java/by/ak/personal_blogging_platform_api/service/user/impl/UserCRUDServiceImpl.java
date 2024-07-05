@@ -1,8 +1,6 @@
 package by.ak.personal_blogging_platform_api.service.user.impl;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,27 +13,28 @@ import by.ak.personal_blogging_platform_api.entity.userEntity.Role;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
-import by.ak.personal_blogging_platform_api.service.user.Mapper;
+import by.ak.personal_blogging_platform_api.security.impl.BCryptPasswordEncoderImpl;
+import by.ak.personal_blogging_platform_api.service.Mapper;
 import by.ak.personal_blogging_platform_api.service.user.UserCRUDService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@AllArgsConstructor
-@Service
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class UserCRUDServiceImpl implements UserCRUDService {
 
 	private final UserRepository repository;
 	private final Mapper<User, UserCreationDto> userCreationMapper;
 	private final Mapper<User, UserDto> userDtoMapper;
+	private final BCryptPasswordEncoderImpl passwordEncoder;
 
 	@Override
 	@Transactional
 	public UserDto createUser(UserCreationDto userCreationDto) {
 
 		User user = userCreationMapper.toEntity(userCreationDto);
-		// TODO (High) Add encrypt to password
-		user.setActive(true);
+		user.setPassword(passwordEncoder.encode(userCreationDto.password()));		user.setActive(true);
 		user.setDateOfCreation(LocalDate.now());
 		user.setRoles(List.of(Role.USER));
 
@@ -95,7 +94,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
 		existingUser.setPassword(user.password());
 		existingUser.setActive(existingUser.isActive());
 		existingUser.setDateOfCreation(existingUser.getDateOfCreation());
-
+		
 		return userDtoMapper.toDto(repository.save(existingUser));
 
 	}

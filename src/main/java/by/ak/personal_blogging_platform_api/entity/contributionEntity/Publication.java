@@ -25,13 +25,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "publication")
 public class Publication implements Serializable {
-
+	//TODO (High) Create owner field for add relation between table user and publication
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@NotBlank
 	@Column(name = "title", nullable = false)
 	private String title;

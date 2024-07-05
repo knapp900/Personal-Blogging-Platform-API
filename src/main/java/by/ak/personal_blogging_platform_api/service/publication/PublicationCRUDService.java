@@ -2,20 +2,21 @@ package by.ak.personal_blogging_platform_api.service.publication;
 
 import java.util.List;
 import by.ak.personal_blogging_platform_api.entity.contributionEntity.Publication;
+import by.ak.personal_blogging_platform_api.entity.contributionEntity.dto.PublicationDto;
 
 public interface PublicationCRUDService {
 
-    Publication createPublication(Publication publication);
+	PublicationDto createPublication(PublicationDto publication);
 
-    List<Publication> getAllPublications();
+    List<PublicationDto> getAllPublications();
 
-    Publication getPublicationById(Long id);
+    PublicationDto getPublicationById(Long id);
 
-    Publication updatePublication(Long id, Publication publicationDetails);
+    PublicationDto updatePublication(Long id, PublicationDto publicationDetails);
 
-    boolean deletePublication(Long id);
+    void deletePublication(Long id);
 
-    Publication publishPublication(Long id);
+    PublicationDto publishPublication(Long id);
 
-    Publication unpublishPublication(Long id);
+    PublicationDto unpublishPublication(Long id);
 }

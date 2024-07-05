@@ -12,8 +12,6 @@ public class PersonalBloggingPlatformApiApplication {
 
 }
 
-//TODO (High) Add Publication controller
 //TODO (Medium) Add security and setup accessibility to and points first basic auth after JWT
 //TODO (Medium) Add tests
 //TODO (low) Add ability for comentation for authorizat
-//TODO (High) Create DTO for User

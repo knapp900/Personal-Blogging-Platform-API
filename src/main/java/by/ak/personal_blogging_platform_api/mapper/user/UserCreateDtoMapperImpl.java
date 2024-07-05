@@ -1,13 +1,13 @@
-package by.ak.personal_blogging_platform_api.service.user.impl;
+package by.ak.personal_blogging_platform_api.mapper.user;
 
 import org.springframework.stereotype.Component;
 
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
-import by.ak.personal_blogging_platform_api.service.user.Mapper;
+import by.ak.personal_blogging_platform_api.service.Mapper;
 
 @Component
-public class UserCreateDtoMapper implements Mapper<User, UserCreationDto> {
+public class UserCreateDtoMapperImpl implements Mapper<User, UserCreationDto> {
 
 	@Override
 	public User toEntity(UserCreationDto dtoElement) {

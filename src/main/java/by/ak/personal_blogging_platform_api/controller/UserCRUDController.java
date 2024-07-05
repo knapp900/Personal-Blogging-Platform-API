@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
-import by.ak.personal_blogging_platform_api.service.publication.ServiceException;
 import by.ak.personal_blogging_platform_api.service.user.UserCRUDService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
-public class UserController {
+public class UserCRUDController {
 
     private final UserCRUDService service;
 
@@ -54,7 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@Valid @PathVariable Long id, @RequestBody UserCreationDto userDetails) throws ServiceException {
+    public ResponseEntity<UserDto> updateUser(@Valid @PathVariable Long id, @RequestBody UserCreationDto userDetails) {
         log.info("Updating user with id: {}, details: {}", id, userDetails);
         UserDto updatedUser = service.updateUser(id, userDetails);
         log.info("User updated: {}", updatedUser);

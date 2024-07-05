@@ -26,7 +26,7 @@ public class Author {
 	
 	@NotBlank
 	@Size(min = 2,max = 30)
-	@Column(name = "name",nullable = false,length = 30)
+	@Column(name = "name",nullable = false,length = 30,unique = true)
 	private String name;
 	
 
