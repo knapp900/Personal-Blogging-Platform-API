@@ -1,6 +1,9 @@
 package by.ak.personal_blogging_platform_api.entity.userEntity.dto;
 
 
+import java.util.Set;
+
+import by.ak.personal_blogging_platform_api.entity.contributionEntity.Publication;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,7 +14,7 @@ public record UserDto(
 		
 		@NotNull
 		@Size(min=2, max=30 , message = "Nickname size should be more 2 character and not more 30 character")
-		String nickname,
+		String username,
 		
 		@NotNull
 		@Size(min=2, max=30, message = "First name size should be more 2 character and not more 30 character")
@@ -23,5 +26,9 @@ public record UserDto(
 		
 		@NotNull
 		@Email(message = "Email validation error")
-		String email) {
+		String email,
+		
+		Set<Publication> publications)
+
+		{
 }

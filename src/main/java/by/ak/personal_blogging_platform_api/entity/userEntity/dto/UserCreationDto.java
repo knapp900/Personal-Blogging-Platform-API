@@ -10,7 +10,7 @@ public record UserCreationDto (
 		
 		@NotNull
 		@Size(min=2, max=30 , message = "Nickname size should be more 2 character and not more 30 character")
-		String nickname,
+		String username,
 		
 		@NotNull
 		@Size(min=2, max=30, message = "First name size should be more 2 character and not more 30 character")

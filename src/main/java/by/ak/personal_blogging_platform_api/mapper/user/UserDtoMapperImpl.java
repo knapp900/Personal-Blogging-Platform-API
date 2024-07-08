@@ -13,10 +13,11 @@ public class UserDtoMapperImpl implements Mapper<User, UserDto> {
 	public User toEntity(UserDto dtoElement) {
 		User user = new User();
 		user.setId(dtoElement.id());
-		user.setNickname(dtoElement.nickname());
+		user.setUsername(dtoElement.username());
 		user.setFirstname(dtoElement.firstname());
 		user.setLastname(dtoElement.lastname());
 		user.setEmail(dtoElement.email());
+		user.setPublications(dtoElement.publications());
 		return user;
 	}
 
@@ -24,10 +25,11 @@ public class UserDtoMapperImpl implements Mapper<User, UserDto> {
 	public UserDto toDto(User entity) {
 		return new UserDto(
 				entity.getId(), 
-				entity.getNickname(), 
+				entity.getUsername(),
 				entity.getFirstname(), 
 				entity.getLastname(), 
-				entity.getEmail());
+				entity.getEmail(),
+				entity.getPublications());
 	}
 
 }

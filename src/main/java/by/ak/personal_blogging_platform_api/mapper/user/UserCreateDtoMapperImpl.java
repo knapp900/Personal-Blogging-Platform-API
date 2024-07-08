@@ -13,7 +13,7 @@ public class UserCreateDtoMapperImpl implements Mapper<User, UserCreationDto> {
 	public User toEntity(UserCreationDto dtoElement) {
 		User user = new User();
 		user.setId(dtoElement.id());
-		user.setNickname(dtoElement.nickname());
+		user.setUsername(dtoElement.username());
 		user.setFirstname(dtoElement.firstname());
 		user.setLastname(dtoElement.lastname());
 		user.setPassword(dtoElement.password());
@@ -25,7 +25,7 @@ public class UserCreateDtoMapperImpl implements Mapper<User, UserCreationDto> {
 	public UserCreationDto toDto(User entity) {
 		return new UserCreationDto(
 				entity.getId(), 
-				entity.getNickname(), 
+				entity.getUsername(), 
 				entity.getFirstname(), 
 				entity.getLastname(),
 				entity.getPassword(), 

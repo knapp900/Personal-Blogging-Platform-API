@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Service
 public class AuthorService {
-	// TODO Implement all methods AuthorService class
+
 	private final AuthorRepository repository;
 
 	public Author ctrateAuthor(Author author) {
@@ -50,7 +50,6 @@ public class AuthorService {
 			throw new IllegalStateException("Author not found");
 		}
 	}
-
 
 	public void deleteAuthor(Long id) {
 		log.info("Deleting author with id: {}", id);

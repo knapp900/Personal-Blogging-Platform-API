@@ -90,7 +90,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
 		existingUser.setEmail(user.email());
 		existingUser.setFirstname(user.firstname());
 		existingUser.setLastname(user.lastname());
-		existingUser.setNickname(user.nickname());
+		existingUser.setUsername(user.username());
 		existingUser.setPassword(user.password());
 		existingUser.setActive(existingUser.isActive());
 		existingUser.setDateOfCreation(existingUser.getDateOfCreation());

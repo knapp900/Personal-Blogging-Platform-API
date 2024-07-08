@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import by.ak.personal_blogging_platform_api.entity.contributionEntity.dto.PublicationDto;
 import by.ak.personal_blogging_platform_api.service.publication.PublicationCRUDService;
 import jakarta.validation.Valid;
-import lombok.EqualsAndHashCode.Exclude;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
