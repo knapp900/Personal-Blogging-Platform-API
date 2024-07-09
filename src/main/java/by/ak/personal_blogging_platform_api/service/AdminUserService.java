@@ -1,13 +1,13 @@
-package by.ak.personal_blogging_platform_api.service.user;
+package by.ak.personal_blogging_platform_api.service;
 
 import java.util.List;
 
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
 
-public interface UserCRUDService {
+public interface AdminUserService {
 
-	UserDto createUser(UserCreationDto userCreationDto);
+	UserDto getCurrentUser();
 
 	UserDto getUserById(long id);
 
@@ -16,4 +16,8 @@ public interface UserCRUDService {
 	void deleteUser(long id);
 
 	UserDto updateUser(long id, UserCreationDto user);
+
+	UserDto findByUsername(String username);
+	
+	String blockingUser(long id);
 }

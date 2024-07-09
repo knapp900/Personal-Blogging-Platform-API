@@ -13,9 +13,7 @@ public class PersonalBloggingPlatformApiApplication {
 	
 }
 
-//TODO (High)- **UserController**: Обработка информации о текущем пользователе (`/api/me`).
 //TODO (High)- **AdminController**: Обработка информации для администратора (`/api/me/admin`).
-//TODO (High)- **RegistrationController**: Регистрация пользователей (`/api/signin/registration`).
 //TODO (High)- **LoginController**: Аутентификация пользователей (`/api/login`).
 //TODO (High)- **PublicationController**: Обработка публикаций (создание, редактирование, получение всех, получение одной, обновление, удаление).
 //TODO (High)- **AuthorController**: Обработка авторов (создание, получение всех, получение одного, обновление, удаление).
