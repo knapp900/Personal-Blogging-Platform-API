@@ -1,82 +1,64 @@
-package by.ak.personal_blogging_platform_api.service.user.impl;
+package by.ak.personal_blogging_platform_api.service.impl;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import by.ak.personal_blogging_platform_api.dao.UserRepository;
-import by.ak.personal_blogging_platform_api.entity.userEntity.Role;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
-import by.ak.personal_blogging_platform_api.security.impl.BCryptPasswordEncoderImpl;
+import by.ak.personal_blogging_platform_api.service.AdminUserService;
 import by.ak.personal_blogging_platform_api.service.Mapper;
-import by.ak.personal_blogging_platform_api.service.user.UserCRUDService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserCRUDServiceImpl implements UserCRUDService {
+public class AdminUserServiceImpl implements AdminUserService {
 
 	private final UserRepository repository;
-	private final Mapper<User, UserCreationDto> userCreationMapper;
 	private final Mapper<User, UserDto> userDtoMapper;
-	private final BCryptPasswordEncoderImpl passwordEncoder;
 
 	@Override
-	@Transactional
-	public UserDto createUser(UserCreationDto userCreationDto) {
+	public UserDto getCurrentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+		return userDtoMapper.toDto(repository.findByUsername(username).get());
 
-		User user = userCreationMapper.toEntity(userCreationDto);
-		user.setPassword(passwordEncoder.encode(userCreationDto.password()));		user.setActive(true);
-		user.setDateOfCreation(LocalDate.now());
-		user.setRoles(List.of(Role.USER));
-
-		try {
-
-			return userDtoMapper.toDto(repository.save(user));
-
-		} catch (DataIntegrityViolationException e) {
-			log.error("Failed to create user: {}", e.getMessage());
-			throw new IllegalArgumentException("Email address is already in use");
-
-		} catch (Exception e) {
-			log.error("Error creating user", e);
-			throw new RuntimeException("Failed to create user", e);
-		}
 	}
 
 	@Override
 	public UserDto getUserById(long id) {
-		return userDtoMapper.toDto(repository.findById(id).orElseThrow(() -> {
-			log.error("User not found with id: {}", id);
-			return new NoSuchElementException("User not found with id: " + id);
-		}));
+
+		return userDtoMapper.toDto(
+				repository.findById(id)
+				.orElseThrow(() -> new NoSuchElementException("User not found with id:" + id)));
 	}
 
 	@Override
 	public List<UserDto> getAllUsers() {
 		
 		return repository.findAll().stream()
-				.map(u -> userDtoMapper.toDto(u))
+				.map(user -> userDtoMapper.toDto(user))
 				.toList();
 	}
 
 	@Override
-	@Transactional
 	public void deleteUser(long id) {
-		if (repository.existsById(id)) {
+		if (repository.findById(id).isPresent()) {
 			repository.deleteById(id);
 		} else {
-			log.error("User not found with id: {}", id);
-			throw new NoSuchElementException("User not found with id: " + id);
+			throw new NoSuchElementException("User is not exist with id:" + id);
 		}
+
 	}
 
 	@Override
@@ -86,7 +68,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
 			log.error("User not exist with id: {}", id);
 			return new NoSuchElementException("User not exist with id: " + id);
 		});
-
+		// All fields must already fill in userDto
 		existingUser.setEmail(user.email());
 		existingUser.setFirstname(user.firstname());
 		existingUser.setLastname(user.lastname());
@@ -94,8 +76,34 @@ public class UserCRUDServiceImpl implements UserCRUDService {
 		existingUser.setPassword(user.password());
 		existingUser.setActive(existingUser.isActive());
 		existingUser.setDateOfCreation(existingUser.getDateOfCreation());
-		
+
 		return userDtoMapper.toDto(repository.save(existingUser));
 
 	}
+
+	@Override
+	public UserDto findByUsername(String username) {
+		
+		return userDtoMapper.toDto(
+				repository.findByUsername(username)
+				.orElseThrow(() -> new NoSuchElementException("User not found with username:" + username)));
+	}
+
+	@Override
+	public String blockingUser(long id) {
+		
+		Optional<User> userForBlocking = repository.findById(id);
+		
+		if (userForBlocking.isPresent()) {
+			userForBlocking.get().setActive(false);
+			repository.save(userForBlocking.get());
+			return "User has been blocked.";
+		} else {
+			throw new NoSuchElementException("User not found with id:" + id);
+		}
+		
+	}
+	
+	
+
 }
