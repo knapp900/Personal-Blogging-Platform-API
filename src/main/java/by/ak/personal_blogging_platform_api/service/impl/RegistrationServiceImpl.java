@@ -40,7 +40,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		user.setPassword(password.toString());
 		user.setActive(true);
 		user.setDateOfCreation(LocalDate.now());
-		user.setRoles(List.of(Role.ROLE_USER));
+		user.setRoles(List.of(Role.USER));
 
 		try {
 

@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RequestMapping("/api/me")
 public class UserController {
-//TODO (Medium) Add deactivate method to UserController
 	private final UserService service;
 
 	@GetMapping
@@ -32,7 +31,7 @@ public class UserController {
 		return service.updateUser(getCurrentUser().id(), userDto);
 	}
 
-	@DeleteMapping
+	@PutMapping ("/delete-me")
 	public void deactivateUser() {
 		service.deactivateUser(getCurrentUser().id());
 	}

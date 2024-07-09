@@ -1,23 +1,24 @@
 package by.ak.personal_blogging_platform_api.service;
 
-import java.util.List;
+import by.ak.personal_blogging_platform_api.entity.userEntity.dto.AdminUserDto;
 
-import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
-import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
+import java.util.List;
 
 public interface AdminUserService {
 
-	UserDto getCurrentUser();
+    AdminUserDto getCurrentUser();
 
-	UserDto getUserById(long id);
+    AdminUserDto getUserById(long id);
 
-	List<UserDto> getAllUsers();
+    List<AdminUserDto> getAllUsers();
 
-	void deleteUser(long id);
+    void deleteUser(long id);
 
-	UserDto updateUser(long id, UserCreationDto user);
+    AdminUserDto updateUser(long id, AdminUserDto user);
 
-	UserDto findByUsername(String username);
-	
-	String blockingUser(long id);
+    AdminUserDto findByUsername(String username);
+
+    void blockingUser(long id);
+
+    void unblockingUser(long id);
 }

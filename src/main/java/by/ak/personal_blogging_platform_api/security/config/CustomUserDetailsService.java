@@ -1,18 +1,17 @@
-package by.ak.personal_blogging_platform_api.service.impl;
-
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+package by.ak.personal_blogging_platform_api.security.config;
 
 import by.ak.personal_blogging_platform_api.dao.UserRepository;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@Service
+@Configuration
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;

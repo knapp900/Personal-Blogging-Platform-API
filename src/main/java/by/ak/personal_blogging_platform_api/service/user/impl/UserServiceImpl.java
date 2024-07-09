@@ -1,6 +1,7 @@
 package by.ak.personal_blogging_platform_api.service.user.impl;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
@@ -35,11 +36,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deactivateUser(long id) {
-		if (repository.existsById(id)) {
-			repository.deleteById(id);
+//		if (repository.existsById(id)) {
+//			repository.deleteById(id);
+//		} else {
+//			log.error("User not found with id: {}", id);
+//			throw new NoSuchElementException("User not found with id: " + id);
+//		}
+		//FIXME Method throw "User not found with id" with correct ID!
+		Optional<User> userForDeactivate = repository.findById(id);
+
+		if (userForDeactivate.isPresent()) {
+			userForDeactivate.get().setActive(false);
+			repository.save(userForDeactivate.get());
 		} else {
-			log.error("User not found with id: {}", id);
-			throw new NoSuchElementException("User not found with id: " + id);
+			throw new NoSuchElementException("User not found with id:" + id);
 		}
 	}
 
