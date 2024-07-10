@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import by.ak.personal_blogging_platform_api.dao.UserRepository;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
-import by.ak.personal_blogging_platform_api.service.Mapper;
+import by.ak.personal_blogging_platform_api.service.mapper.Mapper;
 import by.ak.personal_blogging_platform_api.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
+//TODO (High)-Убрать userRepository и заменить на userServiceOfRawEntity
 
 	private final UserRepository repository;
 	private final Mapper<User, UserDto> userDtoMapper;
@@ -36,12 +37,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deactivateUser(long id) {
-//		if (repository.existsById(id)) {
-//			repository.deleteById(id);
-//		} else {
-//			log.error("User not found with id: {}", id);
-//			throw new NoSuchElementException("User not found with id: " + id);
-//		}
 		//FIXME Method throw "User not found with id" with correct ID!
 		Optional<User> userForDeactivate = repository.findById(id);
 
@@ -71,7 +66,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
 	public UserDto findByUsername(String username) {
 
 		return userDtoMapper.toDto(repository.findByUsername(username)

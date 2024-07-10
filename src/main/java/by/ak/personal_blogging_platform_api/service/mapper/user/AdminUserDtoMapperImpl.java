@@ -1,8 +1,8 @@
-package by.ak.personal_blogging_platform_api.mapper.user;
+package by.ak.personal_blogging_platform_api.service.mapper.user;
 
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.AdminUserDto;
-import by.ak.personal_blogging_platform_api.service.Mapper;
+import by.ak.personal_blogging_platform_api.service.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component

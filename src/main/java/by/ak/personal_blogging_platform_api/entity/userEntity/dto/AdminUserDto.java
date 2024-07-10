@@ -1,6 +1,6 @@
 package by.ak.personal_blogging_platform_api.entity.userEntity.dto;
 
-import by.ak.personal_blogging_platform_api.entity.contributionEntity.Publication;
+import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 import by.ak.personal_blogging_platform_api.entity.userEntity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

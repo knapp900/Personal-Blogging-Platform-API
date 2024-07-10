@@ -1,4 +1,4 @@
-package by.ak.personal_blogging_platform_api.service;
+package by.ak.personal_blogging_platform_api.service.admin;
 
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.AdminUserDto;
 

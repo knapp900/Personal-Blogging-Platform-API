@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
-import by.ak.personal_blogging_platform_api.service.RegistrationService;
+import by.ak.personal_blogging_platform_api.service.common.RegistrationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -12,6 +12,7 @@ public class PersonalBloggingPlatformApiApplication {
 	}
 	
 }
+//TODO (High)- Привести в порядок пакеты!
 //TODO (high)- Refresh globalException class
 //TODO (High)- Add logging for user and admin
 //TODO (High)- Add logging for user and admin

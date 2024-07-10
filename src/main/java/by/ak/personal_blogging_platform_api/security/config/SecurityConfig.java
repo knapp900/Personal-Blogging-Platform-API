@@ -24,7 +24,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/api/signin/registration").permitAll() 
 				.requestMatchers("/api/admin/**").hasRole("ADMIN") // Только для пользователей с ролью ADMIN
-				.requestMatchers("/api/me*").hasAnyRole("ADMIN","USER") 																						// путь
+				.requestMatchers("/api/me/**").hasAnyRole("ADMIN","USER") 																						// путь
 				.anyRequest().authenticated() // Остальные запросы требуют аутентификации
 		)		.csrf().disable() // Отключаем CSRF (опционально)
 				.httpBasic(); // Используем базовую аутентификацию

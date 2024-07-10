@@ -3,8 +3,8 @@ package by.ak.personal_blogging_platform_api.service.publication;
 import java.time.LocalDate;
 import java.util.List;
 
-import by.ak.personal_blogging_platform_api.entity.contributionEntity.Publication;
-import by.ak.personal_blogging_platform_api.entity.contributionEntity.Tag;
+import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
+import by.ak.personal_blogging_platform_api.entity.publcationEntity.Tag;
 
 public interface PublicationSearchService {
 

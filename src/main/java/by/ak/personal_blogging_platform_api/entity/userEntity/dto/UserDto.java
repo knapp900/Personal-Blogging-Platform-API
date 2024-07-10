@@ -3,7 +3,7 @@ package by.ak.personal_blogging_platform_api.entity.userEntity.dto;
 
 import java.util.Set;
 
-import by.ak.personal_blogging_platform_api.entity.contributionEntity.Publication;
+import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
