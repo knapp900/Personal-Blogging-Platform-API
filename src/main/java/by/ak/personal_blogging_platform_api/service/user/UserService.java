@@ -9,7 +9,9 @@ public interface UserService {
 	UserDto updateUser(long id, UserDto user);
 
 	void deactivateUser(long id);
-
+//TODO Вынести метод findByUsername в отдельный интерфейс например  ServiceOfFindUser или нет
 	UserDto findByUsername(String username);
+
+
 
 }

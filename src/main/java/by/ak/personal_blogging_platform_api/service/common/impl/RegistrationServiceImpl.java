@@ -1,10 +1,10 @@
-package by.ak.personal_blogging_platform_api.service.impl;
+package by.ak.personal_blogging_platform_api.service.common.impl;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import by.ak.personal_blogging_platform_api.service.common.RegistrationService;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +14,7 @@ import by.ak.personal_blogging_platform_api.entity.userEntity.Role;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserCreationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.dto.UserDto;
-import by.ak.personal_blogging_platform_api.service.Mapper;
-import by.ak.personal_blogging_platform_api.service.RegistrationService;
+import by.ak.personal_blogging_platform_api.service.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +39,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		user.setPassword(password.toString());
 		user.setActive(true);
 		user.setDateOfCreation(LocalDate.now());
-		user.setRoles(List.of(Role.ROLE_USER));
+		user.setRoles(List.of(Role.USER));
 
 		try {
 

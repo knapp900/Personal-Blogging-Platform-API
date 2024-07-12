@@ -5,7 +5,7 @@
 	import java.util.List;
 	import java.util.Set;
 	
-	import by.ak.personal_blogging_platform_api.entity.contributionEntity.Publication;
+	import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 	import jakarta.persistence.CascadeType;
 	import jakarta.persistence.CollectionTable;
 	import jakarta.persistence.Column;
