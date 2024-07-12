@@ -4,7 +4,7 @@ import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 
 import java.util.List;
 
-public interface UserServiceOfRawEntity {
+public interface UserCrudServiceOfRawEntity {
 
     User getCurrentUser();
     User getUserById(long id);

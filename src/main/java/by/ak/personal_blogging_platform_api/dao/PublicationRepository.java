@@ -11,12 +11,10 @@ import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 
 public interface PublicationRepository extends JpaRepository<Publication, Long> {
 	
-	List<Publication> findByPublishedDate(LocalDate date);
 	List<Publication> findByUser(User user);
-
 	Optional<Publication> findByUserAndId(User user, Long id);
 
-	List<Publication> findByContentContaining(String word);
-
+//	List<Publication> findByContentContaining(String word);
+//	List<Publication> findByPublishedDate(LocalDate date);
 //	List<Publication> findByTagsIn(List<Tag> tags);
 }

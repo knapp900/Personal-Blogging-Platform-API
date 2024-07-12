@@ -23,7 +23,7 @@ public record UserManagementDto(Long id,
 		String lastname,
 		
 		@NotNull
-		@Size(min=6,max=30, message = "Password size should be more 2 character and not more 30 character")
+		@Size(min=6,max=30, message = "Password size should be more 6 character and not more 30 character")
 		String password,
 		
 		@NotNull
@@ -37,6 +37,5 @@ public record UserManagementDto(Long id,
 		List<Role> roles
 		
 		) {
-	//TODO (High) UserManagementDto
 
 }

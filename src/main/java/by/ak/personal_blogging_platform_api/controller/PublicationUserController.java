@@ -2,7 +2,7 @@ package by.ak.personal_blogging_platform_api.controller;
 
 import java.util.List;
 
-import by.ak.personal_blogging_platform_api.service.publication.PublicationUserService;
+import by.ak.personal_blogging_platform_api.service.exceptions.publication.publication.PublicationUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,11 +27,10 @@ public class PublicationUserController {
 
 	private final PublicationUserService service;
 
-	private final UserController userController;
 	@PostMapping
 	public ResponseEntity<PublicationDto> createPublication(@Valid @RequestBody PublicationDto publicationDto) {
 		log.info("Creating publication: {}" + publicationDto);
-		PublicationDto createdPublication = service.createPublication(publicationDto);
+		PublicationDto createdPublication = service.createOwnPublication(publicationDto);
 		log.info("Publication created: {}" + createdPublication);
 
 		return new ResponseEntity<PublicationDto>(createdPublication, HttpStatus.CREATED);
