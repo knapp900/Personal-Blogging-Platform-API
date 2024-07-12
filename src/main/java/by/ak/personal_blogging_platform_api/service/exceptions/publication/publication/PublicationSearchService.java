@@ -1,4 +1,4 @@
-package by.ak.personal_blogging_platform_api.service.publication;
+package by.ak.personal_blogging_platform_api.service.exceptions.publication.publication;
 
 import java.time.LocalDate;
 import java.util.List;

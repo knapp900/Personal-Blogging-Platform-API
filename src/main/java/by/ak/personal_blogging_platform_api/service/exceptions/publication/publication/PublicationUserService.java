@@ -1,11 +1,11 @@
-package by.ak.personal_blogging_platform_api.service.publication;
+package by.ak.personal_blogging_platform_api.service.exceptions.publication.publication;
 
 import java.util.List;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.dto.PublicationDto;
 
 public interface PublicationUserService {
 
-	PublicationDto createPublication(PublicationDto publication);
+	PublicationDto createOwnPublication(PublicationDto publication);
 
     List<PublicationDto> getAllOwnPublications();
 
@@ -15,7 +15,7 @@ public interface PublicationUserService {
 
     void deleteOwnPublication(Long id);
 
-    PublicationDto publishPublication(Long id);
+    void publishPublication(Long id);
 
-    PublicationDto unpublishPublication(Long id);
+    void unpublishPublication(Long id);
 }
