@@ -1,10 +1,10 @@
-package by.ak.personal_blogging_platform_api.service.exceptions.publication.publication.impl;
+package by.ak.personal_blogging_platform_api.service.publication.impl;
 
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.dto.PublicationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.service.mapper.Mapper;
-import by.ak.personal_blogging_platform_api.service.exceptions.publication.publication.PublicationUserService;
+import by.ak.personal_blogging_platform_api.service.publication.PublicationUserService;
 import by.ak.personal_blogging_platform_api.service.user.UserCrudServiceOfRawEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

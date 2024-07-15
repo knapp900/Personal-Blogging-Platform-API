@@ -1,18 +1,22 @@
-package by.ak.personal_blogging_platform_api.service.exceptions.publication.publication.impl;
+package by.ak.personal_blogging_platform_api.service.publication.impl;
 
 import by.ak.personal_blogging_platform_api.dao.PublicationRepository;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
+import by.ak.personal_blogging_platform_api.entity.publcationEntity.Tag;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import by.ak.personal_blogging_platform_api.service.exceptions.publication.PublicationNotFoundException;
 import by.ak.personal_blogging_platform_api.service.exceptions.publication.PublicationServiceExceptoin;
-import by.ak.personal_blogging_platform_api.service.exceptions.publication.publication.PublicationCrudServiceOfRawEntity;
 import by.ak.personal_blogging_platform_api.service.exceptions.user.UserServiceException;
+import by.ak.personal_blogging_platform_api.service.publication.PublicationCrudServiceOfRawEntity;
+import by.ak.personal_blogging_platform_api.service.publication.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 @Slf4j
@@ -22,10 +26,14 @@ public class PublicationCrudServiceOfRawEntityImpl implements PublicationCrudSer
 
     private final PublicationRepository repository;
 
+    private final TagService tagRepository;
+
 
     @Override
     public Publication createPublication(Publication publication, User creator) {
         try {
+            List<Tag> tags = new ArrayList<>();
+
             Publication publicationForSave = new Publication();
             publicationForSave.setTitle(publication.getTitle());
             publicationForSave.setContent(publication.getContent());
@@ -33,6 +41,19 @@ public class PublicationCrudServiceOfRawEntityImpl implements PublicationCrudSer
             publicationForSave.setCreationDateTime(LocalDateTime.now());
             publicationForSave.setPublished(false);
             publicationForSave.setUser(creator);
+
+
+            preparingTagsForSaving(publication.getTags());
+            publication.getTags().stream().forEach(tag -> tags.add(tagRepository.createTag(tag)));
+
+//            publication.getTags().stream().map(tag -> {
+//                publication.setTags(preparingTagsForSaving(publication.getTags()));
+//                return tagRepository.createTag(tag);
+//            });
+
+            publicationForSave.setTags(tags);
+//            publicationForSave.setTags(publication.getTags());
+
             return repository.save(publicationForSave);
         } catch (Exception e) {
             log.error("Error creating publication for user: {}", creator.getId(), e);
@@ -50,6 +71,7 @@ public class PublicationCrudServiceOfRawEntityImpl implements PublicationCrudSer
             throw new UserServiceException("Failed to get all publications", e);
         }
     }
+
     @Override
     public List<Publication> getAllPublicationsByUser(User user) {
         try {
@@ -88,6 +110,8 @@ public class PublicationCrudServiceOfRawEntityImpl implements PublicationCrudSer
 
             existingPublication.setTitle(Objects.nonNull(publicationDetails.getTitle()) ? publicationDetails.getTitle() : existingPublication.getTitle());
             existingPublication.setContent(Objects.nonNull(publicationDetails.getContent()) ? publicationDetails.getContent() : existingPublication.getTitle());
+            existingPublication.setTags((!publicationDetails.getTags().isEmpty()) ? publicationDetails.getTags() : existingPublication.getTags());
+
             return repository.save(existingPublication);
 
         } catch (Exception e) {
@@ -158,6 +182,25 @@ public class PublicationCrudServiceOfRawEntityImpl implements PublicationCrudSer
         } catch (Exception e) {
             log.error("Error of unpublishing with id:{}", id, e);
             throw new PublicationServiceExceptoin("Failed of unpublishing with id: " + id, e);
+        }
+    }
+
+    private List<Tag> preparingTagsForSaving(List<Tag> tags) {
+        if (!tags.isEmpty()) {
+
+            return tags.stream()
+                    .map(tag -> {
+                        String trimmedName = tag.getName().trim().toUpperCase(Locale.ROOT);
+                        tag.setName(trimmedName);
+
+                        if (tag.getName().charAt(0) != '#') {
+                            tag.setName("#" + tag.getName());
+                        }
+                        return tag;
+                    })
+                    .toList();
+        } else {
+            return tags;
         }
     }
 }

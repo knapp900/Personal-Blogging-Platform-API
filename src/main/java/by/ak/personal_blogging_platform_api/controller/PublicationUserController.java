@@ -2,7 +2,7 @@ package by.ak.personal_blogging_platform_api.controller;
 
 import java.util.List;
 
-import by.ak.personal_blogging_platform_api.service.exceptions.publication.publication.PublicationUserService;
+import by.ak.personal_blogging_platform_api.service.publication.PublicationUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

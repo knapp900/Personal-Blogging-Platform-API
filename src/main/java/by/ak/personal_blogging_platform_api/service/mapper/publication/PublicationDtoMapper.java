@@ -24,6 +24,8 @@ public class PublicationDtoMapper implements Mapper<Publication, PublicationDto>
 		publication.setTitle(dtoElement.title());
 		publication.setUser(serviceOfRawEntity.getUserById(Objects.nonNull(dtoElement.userId())? dtoElement.userId():serviceOfRawEntity.getCurrentUser().getId()));
 		publication.setContent(dtoElement.content());
+		publication.setTags(dtoElement.tags());
+
 
 		return publication;
 	}
@@ -36,7 +38,8 @@ public class PublicationDtoMapper implements Mapper<Publication, PublicationDto>
 				entity.getTitle(),
 				entity.getContent(),
 				entity.getUser().getId(),
-				entity.getUser().getUsername());
+				entity.getUser().getUsername(),
+				entity.getTags());
 
 	}
 
