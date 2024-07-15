@@ -2,6 +2,7 @@ package by.ak.personal_blogging_platform_api.entity.publcationEntity.dto;
 
 import java.util.List;
 
+import by.ak.personal_blogging_platform_api.entity.publcationEntity.Tag;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -17,7 +18,9 @@ public record PublicationDto(
 
 		Long userId,
 
-		String username
+		String username,
+
+		List<Tag> tags
 
 ) {
 

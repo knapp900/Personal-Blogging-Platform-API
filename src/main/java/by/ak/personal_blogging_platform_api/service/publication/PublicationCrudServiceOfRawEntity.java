@@ -1,4 +1,4 @@
-package by.ak.personal_blogging_platform_api.service.exceptions.publication.publication;
+package by.ak.personal_blogging_platform_api.service.publication;
 
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
