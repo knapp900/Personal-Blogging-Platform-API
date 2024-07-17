@@ -3,13 +3,14 @@ package by.ak.personal_blogging_platform_api.security.config;
 import by.ak.personal_blogging_platform_api.dao.UserRepository;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.stream.Collectors;
-
+@Slf4j
 @RequiredArgsConstructor
 @Configuration
 public class CustomUserDetailsService implements UserDetailsService {

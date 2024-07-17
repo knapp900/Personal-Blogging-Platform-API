@@ -3,6 +3,7 @@ package by.ak.personal_blogging_platform_api.service.publication.impl;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.dto.PublicationDto;
 import by.ak.personal_blogging_platform_api.entity.userEntity.User;
+import by.ak.personal_blogging_platform_api.service.exceptions.publication.PublicationServiceExceptoin;
 import by.ak.personal_blogging_platform_api.service.mapper.Mapper;
 import by.ak.personal_blogging_platform_api.service.publication.PublicationUserService;
 import by.ak.personal_blogging_platform_api.service.user.UserCrudServiceOfRawEntity;
@@ -22,9 +23,12 @@ public class PublicationUserServiceImpl implements PublicationUserService {
     @Override
     public PublicationDto createOwnPublication(PublicationDto publication) {
         User user = userCrudServiceOfRawEntity.getCurrentUser();
-
-        return publicationDtoMapper.toDto(repository
-                .createPublication(publicationDtoMapper.toEntity(publication), user));
+        if (user.isActive()) {
+            return publicationDtoMapper.toDto(repository
+                    .createPublication(publicationDtoMapper.toEntity(publication), user));
+        } else {
+            throw new PublicationServiceExceptoin("Publication has not created because user with id:" + user.getId() + " has been blocked ");
+        }
     }
 
 
@@ -46,9 +50,13 @@ public class PublicationUserServiceImpl implements PublicationUserService {
     @Override
     public PublicationDto updateOwnPublication(Long id, PublicationDto publicationDetails) {
         User user = userCrudServiceOfRawEntity.getCurrentUser();
-        repository.findByUserAndId(user, id);
-        return publicationDtoMapper.toDto(repository
-                .updatePublication(id, publicationDtoMapper.toEntity(publicationDetails)));
+        if (user.isActive()) {
+            repository.findByUserAndId(user, id);
+            return publicationDtoMapper.toDto(repository
+                    .updatePublication(id, publicationDtoMapper.toEntity(publicationDetails)));
+        } else {
+            throw new PublicationServiceExceptoin("Publication has not updated because user with id:" + user.getId() + " has been blocked ");
+        }
 
     }
 

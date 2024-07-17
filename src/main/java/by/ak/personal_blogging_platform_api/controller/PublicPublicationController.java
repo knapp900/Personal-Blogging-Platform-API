@@ -1,6 +1,5 @@
 package by.ak.personal_blogging_platform_api.controller;
 
-import by.ak.personal_blogging_platform_api.entity.publcationEntity.Publication;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.Tag;
 import by.ak.personal_blogging_platform_api.entity.publcationEntity.dto.PublicationDto;
 import by.ak.personal_blogging_platform_api.service.exceptions.publication.PublicationServiceExceptoin;
