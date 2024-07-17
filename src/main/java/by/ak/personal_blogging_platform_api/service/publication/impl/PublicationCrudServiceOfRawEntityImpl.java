@@ -46,13 +46,7 @@ public class PublicationCrudServiceOfRawEntityImpl implements PublicationCrudSer
             preparingTagsForSaving(publication.getTags());
             publication.getTags().stream().forEach(tag -> tags.add(tagRepository.createTag(tag)));
 
-//            publication.getTags().stream().map(tag -> {
-//                publication.setTags(preparingTagsForSaving(publication.getTags()));
-//                return tagRepository.createTag(tag);
-//            });
-
             publicationForSave.setTags(tags);
-//            publicationForSave.setTags(publication.getTags());
 
             return repository.save(publicationForSave);
         } catch (Exception e) {

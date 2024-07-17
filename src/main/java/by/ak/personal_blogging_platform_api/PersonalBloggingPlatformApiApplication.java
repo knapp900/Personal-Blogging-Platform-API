@@ -13,7 +13,6 @@ public class PersonalBloggingPlatformApiApplication {
 	
 }
 //TODO (High)- Добавить префикс "api/blog" во все контроллеры
-//TODO (High)- Проверить возвращаемые статусы в контроллерах
 //TODO (High)- **PublicationAdminController**: Обработка публикаций (создание, редактирование, получение всех, получение одной, обновление, удаление).
 //TODO (Medium)- Add internationalization
 //TODO (High)- **LoginController**: Аутентификация пользователей (`/api/login`).
