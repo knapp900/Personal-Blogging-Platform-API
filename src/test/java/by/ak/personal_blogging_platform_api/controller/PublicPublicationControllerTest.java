@@ -35,7 +35,7 @@ public class PublicPublicationControllerTest {
 
     @Test
     @DisplayName("getPublications возвращает все публикации")
-    void getPublications_ReturnsPublications() {
+    void getPublications_RequestIsValid_ReturnsPublications() {
         //given
         Pageable pageable = PageRequest.of(0, 10);
         PublicationDto expectedPublication = new PublicationDto(
@@ -59,7 +59,7 @@ public class PublicPublicationControllerTest {
 
     @Test
     @DisplayName("getPublicationsByDate возвращает публикации по дате")
-    void getPublicationsByDate_ReturnsPublications() {
+    void getPublicationsByDate_RequestIsValid_ReturnsPublications() {
         //given
         String date = "2024-07-17";
         PublicationDto expectedPublication = new PublicationDto(
@@ -85,7 +85,7 @@ public class PublicPublicationControllerTest {
 
     @Test
     @DisplayName("searchPublicationsByWords возвращает публикации по словам")
-    void searchPublicationsByWords_ReturnsPublications() {
+    void searchPublicationsByWords_RequestIsValid_ReturnsPublications() {
         //given
         String words = "test";
         PublicationDto expectedPublication = new PublicationDto(
@@ -108,10 +108,11 @@ public class PublicPublicationControllerTest {
         verify(this.service, times(1)).findByContentContaining(words, pageable);
     }
 
+
     @Disabled
     @Test
     @DisplayName("getPublicationsByTags возвращает публикации по тегам")
-    void getPublicationsByTags_ReturnsPublications() {
+    void getPublicationsByTags_RequestIsValid_ReturnsPublications() {
         //FIXME
         //given
         List<String> tagsForController = List.of("#JAVA");
@@ -129,7 +130,7 @@ public class PublicPublicationControllerTest {
         when(this.service.findByTags(tags, pageable)).thenReturn(expectedPublications);
 
         //when
-        ResponseEntity<Page<PublicationDto>> response = this.controller.getPublicationsByTags(tags, pageable);
+        ResponseEntity<Page<PublicationDto>> response = this.controller.getPublicationsByTags(tagsForController, pageable);
 
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());
