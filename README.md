@@ -16,9 +16,7 @@ Welcome to the Personal Blogging Platform API! This project is a RESTful API for
     - [Installation](#installation)
     - [Running the Application](#running-the-application)
     - [Running Tests](#running-tests)
-- [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+- [API Documentation](#api-documentation)
 - [Contact](#contact)
 
 ## Features
@@ -39,6 +37,7 @@ Welcome to the Personal Blogging Platform API! This project is a RESTful API for
 - **JUnit 5**
 - **Mockito**
 - **Docker**
+- **Swagger/OpenAPI (SpringDoc)**
 
 ## Getting Started
 
@@ -96,3 +95,21 @@ To run the tests, use the following command:
 
 ```sh
 mvn test
+```
+
+### API Documentation
+
+API documentation is available via Swagger. Once the application is running, you can access it at:
+
+```sh
+http://localhost:8080/swagger-ui.html
+```
+```sh
+http://localhost:8080/api-docs
+```
+### Contact
+Feel free to reach out if you have any questions or suggestions!
+
+- **Email: knapp900@gmail.com**
+- **LinkedIn: [Arthur Knapp](#https://www.linkedin.com/in/arthur-knapp-808a6a166/)**
+- **GitHub: [Knapp900](#https://github.com/knapp900)**
