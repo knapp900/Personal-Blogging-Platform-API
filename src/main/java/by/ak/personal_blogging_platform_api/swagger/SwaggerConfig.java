@@ -16,4 +16,5 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("API documentation for the Personal Blogging Platform"));
     }
+
 }

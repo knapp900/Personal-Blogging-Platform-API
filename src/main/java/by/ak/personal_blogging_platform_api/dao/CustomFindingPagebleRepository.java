@@ -15,5 +15,4 @@ public interface CustomFindingPagebleRepository extends JpaRepository<Publicatio
     Page<Publication> findByPublishedDate(LocalDate date, Pageable pageable);
     Page<Publication> findByContentContaining(String words, Pageable pageable);
     Page<Publication> findByTags(List<Tag> tags, Pageable pageable);
-    Page<Publication> findByIsPublished(Boolean isPublished, Pageable pageable);
 }

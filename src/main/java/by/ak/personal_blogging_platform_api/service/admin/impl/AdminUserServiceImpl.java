@@ -35,7 +35,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public List<AdminUserDto> getAllUsers() {
         return repository.getAllUsers().stream()
-                .map(user -> adminUserDtoMapper.toDto(user))
+                .map(adminUserDtoMapper::toDto)
                 .toList();
     }
 
