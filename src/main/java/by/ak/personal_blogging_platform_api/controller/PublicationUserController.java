@@ -29,9 +29,9 @@ public class PublicationUserController {
 
 	@PostMapping
 	public ResponseEntity<PublicationDto> createPublication(@Valid @RequestBody PublicationDto publicationDto) {
-		log.info("Creating publication: {}" + publicationDto);
+		log.info("Creating publication: {}",publicationDto);
 		PublicationDto createdPublication = service.createOwnPublication(publicationDto);
-		log.info("Publication created: {}" + createdPublication);
+		log.info("Publication created: {}",createdPublication);
 
 		return new ResponseEntity<PublicationDto>(createdPublication, HttpStatus.CREATED);
 	}

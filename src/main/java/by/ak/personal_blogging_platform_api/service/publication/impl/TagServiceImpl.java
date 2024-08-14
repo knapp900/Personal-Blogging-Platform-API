@@ -23,12 +23,7 @@ public class TagServiceImpl implements TagService {
 
             Optional<Tag> tagForSave = repository.findByName(tag.getName());
 
-            if (tagForSave.isPresent()) {
-                return tagForSave.get();
-
-            } else {
-                return repository.save(tag);
-            }
+            return tagForSave.orElseGet(() -> repository.save(tag));
 
         } catch (Exception e) {
             log.error("Error creating tag : {}",tag,e);

@@ -32,7 +32,7 @@ public class PublicationSearchServiceImpl implements PublicationSearchService {
     public Page<PublicationDto> findAll(Pageable pageable) {
         try {
             return repository.findAll(pageable)
-                    .map(publication -> publicationDtoMapper.toDto(publication));
+                    .map(publicationDtoMapper::toDto);
         } catch (Exception e) {
             log.error("Error finding publications:", e);
             throw new PublicationServiceExceptoin("Failed to find publications: ", e);
@@ -43,7 +43,7 @@ public class PublicationSearchServiceImpl implements PublicationSearchService {
     public Page<PublicationDto> findByPublishedDate(LocalDate date, Pageable pageable) {
         try {
             return repository.findByPublishedDate(date, pageable)
-                    .map(publication -> publicationDtoMapper.toDto(publication));
+                    .map(publicationDtoMapper::toDto);
         } catch (Exception e) {
             log.error("Error finding publications by date: {}", date, e);
             throw new PublicationServiceExceptoin("Failed to find publications by date: " + date, e);
@@ -54,7 +54,7 @@ public class PublicationSearchServiceImpl implements PublicationSearchService {
     public Page<PublicationDto> findByContentContaining(String words, Pageable pageable) {
         try {
             return repository.findByContentContaining(words, pageable)
-                    .map(publication -> publicationDtoMapper.toDto(publication));
+                    .map(publicationDtoMapper::toDto);
         } catch (Exception e) {
             log.error("Error finding publications by words: {}", words, e);
             throw new PublicationServiceExceptoin("Failed to find publications by words: " + words, e);
@@ -72,7 +72,7 @@ public class PublicationSearchServiceImpl implements PublicationSearchService {
 
         try {
             return repository.findByTags(tagsForSearch, pageable)
-                    .map(publication -> publicationDtoMapper.toDto(publication));
+                    .map(publicationDtoMapper::toDto);
         } catch (Exception e) {
             log.error("Error finding publications by tags: {}", tags, e);
             throw new PublicationServiceExceptoin("Failed to find publications by tags: " + tags, e);

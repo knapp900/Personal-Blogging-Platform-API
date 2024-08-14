@@ -22,14 +22,14 @@ public class PublicationAdminServiceImpl implements PublicationAdminService {
     @Override
     public List<PublicationDto> getAllPublications() {
         return repository.getAllPublications().stream()
-                .map(p -> publicationDtoMapper.toDto(p))
+                .map(publicationDtoMapper::toDto)
                 .toList();
     }
 
     @Override
     public List<PublicationDto> getAllPublicationsByUser(User user) {
         return repository.getAllPublicationsByUser(user).stream()
-                .map(p -> publicationDtoMapper.toDto(p))
+                .map(publicationDtoMapper::toDto)
                 .toList();
     }
 
